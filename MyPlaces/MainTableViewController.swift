@@ -8,36 +8,40 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
-    let restaursnts2 = [ "Ресторан 1", "Ресторан 2", "Ресторан 3", "Ресторан 4", "Ресторан 5",  "Ресторан 6", "Ресторан 7", "Ресторан 8", "Ресторан 9", "Ресторан 10" ]
+    
+
+    
+    let places = Place.gerPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaursnts2.count
+        return places.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! CustomTableViewCell
-        cell.imageOfPlace.image = UIImage(named: restaursnts2[indexPath.row])
-        // Configure the cell...
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.width / 2
         cell.imageOfPlace.clipsToBounds = true
-        cell.nameLabel.text = restaursnts2[indexPath.row]
+        cell.nameLabel.text = places[indexPath.row].name
+        cell.locationLabel.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
+
         return cell
     }
     
+    
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue){
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
