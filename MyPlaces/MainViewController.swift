@@ -28,9 +28,18 @@ class MainViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = restaursnts[indexPath.row]
         cell.imageView?.image = UIImage(named: restaursnts[indexPath.row])
+        let heightCell = cell.frame.size.height
+
+        cell.imageView?.layer.cornerRadius = heightCell / 2
+        
+        
+        cell.imageView?.clipsToBounds = true
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     /*
     // MARK: - Navigation
