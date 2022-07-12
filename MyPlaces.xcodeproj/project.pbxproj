@@ -15,6 +15,7 @@
 		5003FB08287C9E3300DBD650 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003FB07287C9E3300DBD650 /* MainTableViewController.swift */; };
 		5003FB0A287C9E8A00DBD650 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003FB09287C9E8A00DBD650 /* CustomTableViewCell.swift */; };
 		5003FB0C287CB42300DBD650 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003FB0B287CB42300DBD650 /* PlaceModel.swift */; };
+		5003FB0E287CF48100DBD650 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003FB0D287CF48100DBD650 /* NewPlaceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5003FB07287C9E3300DBD650 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		5003FB09287C9E8A00DBD650 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		5003FB0B287CB42300DBD650 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		5003FB0D287CF48100DBD650 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				5003FAF1287B758800DBD650 /* SceneDelegate.swift */,
 				5003FB07287C9E3300DBD650 /* MainTableViewController.swift */,
 				5003FB09287C9E8A00DBD650 /* CustomTableViewCell.swift */,
+				5003FB0D287CF48100DBD650 /* NewPlaceViewController.swift */,
 				5003FB0B287CB42300DBD650 /* PlaceModel.swift */,
 				5003FAF5287B758800DBD650 /* Main.storyboard */,
 				5003FAF8287B758A00DBD650 /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5003FAF0287B758800DBD650 /* AppDelegate.swift in Sources */,
+				5003FB0E287CF48100DBD650 /* NewPlaceViewController.swift in Sources */,
 				5003FB08287C9E3300DBD650 /* MainTableViewController.swift in Sources */,
 				5003FB0C287CB42300DBD650 /* PlaceModel.swift in Sources */,
 				5003FAF2287B758800DBD650 /* SceneDelegate.swift in Sources */,
