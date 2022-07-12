@@ -243,12 +243,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Place" id="CRz-pa-Wsf">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="1rc-8a-Hjt">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1rc-8a-Hjt">
                             <connections>
                                 <segue destination="1tx-B0-orj" kind="unwind" unwindAction="cancelAction:" id="701-zx-LHg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="uQm-88-UpP"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="uQm-88-UpP"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbr-Ov-0gV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,7 +259,6 @@
         <!--Navigation Controller-->
         <scene sceneID="eBi-DN-HRn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jRf-bl-HZa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H6v-oz-Ibl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DTP-jd-cWP">
@@ -274,6 +273,7 @@
                         <segue destination="j0L-70-IW8" kind="relationship" relationship="rootViewController" id="oFk-gr-eOd"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRf-bl-HZa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1008.6956521739131" y="21.428571428571427"/>
         </scene>
