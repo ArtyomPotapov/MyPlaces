@@ -8,11 +8,13 @@
 import UIKit
 
 class NewPlaceViewController: UITableViewController {
-
+    
+    @IBOutlet weak var imageOfPlace: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // для удаления слабовидимых серых разлиновочных линий в нижней части экрана, присвоим свойству tableView.tableFooterView значение чистого пустого UIView()
+        
         
         tableView.tableFooterView = UIView()
     }
@@ -33,18 +35,12 @@ class NewPlaceViewController: UITableViewController {
             ac.addAction(camera)
             ac.addAction(photo)
             ac.addAction(cancel)
-            present(ac, animated: true)
+            present(ac, animated: false)
 
-            
         } else {
             view.endEditing(true)
         }
     }
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-//        view.endEditing(true)
-//
-//    }
 }
 
 extension NewPlaceViewController: UITextFieldDelegate{
@@ -53,20 +49,27 @@ extension NewPlaceViewController: UITextFieldDelegate{
         textField.resignFirstResponder()
         return true
     }
-    
 }
 
 //MARK: - работа с изображениями
 
-extension NewPlaceViewController {
+extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType){
         if UIImagePickerController.isSourceTypeAvailable(source){
             let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = source
-            present(imagePicker, animated: true)
+            present(imagePicker, animated: false)
         }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imageOfPlace.image = info[.editedImage] as? UIImage
+        imageOfPlace.contentMode = .scaleAspectFit
+        imageOfPlace.clipsToBounds = true
+        dismiss(animated: false)
     }
     
 }
