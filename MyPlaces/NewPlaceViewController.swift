@@ -15,17 +15,13 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     
-    var newPlace = Place()
+    
     var isImagePicked = false
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DispatchQueue.main.async {
-            self.newPlace.savePlaces()
-        }
-        
+  
         tableView.tableFooterView = UIView()
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -78,11 +74,17 @@ class NewPlaceViewController: UITableViewController {
     }
     
     func saveNewPlace(){
-//        newPlace = Place(name: placeName.text!,
-//                         location: placeLocation?.text,
-//                         type: placeType?.text,
-//                         restaurantImage: nil,
-//                         image: placeImage.image)
+        let image = placeImage.image
+//        let newPlace = Place()
+        let imageData = image?.pngData()
+        
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        StorageManager.saveObject(newPlace)
+        
+//        newPlace.name = placeName.text!
+//        newPlace.location = placeLocation.text
+//        newPlace.type = placeType.text
+//        newPlace.imageData = imageData
     }
     
 }
