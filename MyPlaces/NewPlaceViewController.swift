@@ -22,9 +22,9 @@ class NewPlaceViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.newPlace.savePlaces()
-//        }
+        }
         
         tableView.tableFooterView = UIView()
         saveButton.isEnabled = false
