@@ -20,7 +20,9 @@ class MainTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
     }
@@ -40,6 +42,29 @@ class MainTableViewController: UITableViewController {
         cell.imageOfPlace.clipsToBounds = true
         return cell
     }
+    
+    //MARK: - Table view delegate
+    
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let place = places[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _,_  in
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .none)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let place = places[indexPath.row]
+//        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _, _ in
+//            StorageManager.deleteObject(place)
+//            tableView.deleteRows(at: [indexPath], with: .none)
+//
+//        }
+//        return [deleteAction]
+//    }
     
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue){
