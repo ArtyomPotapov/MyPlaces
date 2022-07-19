@@ -6,14 +6,25 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+// MARK: - тут вставлен кусок кода из видео 21.Sorting 5-го модуля (время 3:40), там автор копировал его со старой версии сайта Realm.io в разделе миграции, но теперь там всё не так, а где брать его сейчас я не знаю, ибо этот сайт частично с ошибкой 403. Всё это нужно при изменении модели (добавление какого-то нового поля, как в нашем случае свойство "date") после того, как уже создана какая-то база в программе и надо внести в неё изменения без сноса базы или без переустановки программы.
+        
+        let config = Realm.Configuration(schemaVersion: 1,
+                                         migrationBlock: {migration, oldSchemaVersion in
+            if (oldSchemaVersion < 1){
+                //nothing to do!
+                // умный Realm сам всё поймёт и проглотит то новое свойтво, которого раньше не было
+            }
+        })
+        
+        Realm.Configuration.defaultConfiguration = config
+        
         return true
     }
 
