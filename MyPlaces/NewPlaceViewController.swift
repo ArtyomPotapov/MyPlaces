@@ -90,7 +90,7 @@ class NewPlaceViewController: UITableViewController {
         
         saveButton.isEnabled = true
     }
-    
+    let search = UISearchController()
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: false)
