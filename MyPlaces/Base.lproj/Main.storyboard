@@ -17,6 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="eSl-74-lL4">
                                 <cells>
@@ -145,6 +146,29 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="16" indentationWidth="16" rowHeight="140" id="a5E-P6-t01">
+                                        <rect key="frame" x="0.0" y="519.5" width="414" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a5E-P6-t01" id="KWg-Uz-6GE">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dja-2T-wUM" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
+                                                    <rect key="frame" x="81" y="48" width="252" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dja-2T-wUM" firstAttribute="centerY" secondItem="KWg-Uz-6GE" secondAttribute="centerY" id="32b-fK-bhZ"/>
+                                                <constraint firstItem="dja-2T-wUM" firstAttribute="centerX" secondItem="KWg-Uz-6GE" secondAttribute="centerX" id="E8U-4b-sMG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="300" minY="0.0" maxX="16" maxY="0.0"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -170,13 +194,14 @@
                         <outlet property="placeLocation" destination="17m-62-MsW" id="3aD-Di-qvH"/>
                         <outlet property="placeName" destination="wJg-eA-rEs" id="c6j-ye-aaK"/>
                         <outlet property="placeType" destination="o97-iT-JIk" id="lFC-kn-c2P"/>
+                        <outlet property="ratingControl" destination="dja-2T-wUM" id="6TE-Ko-Nlg"/>
                         <outlet property="saveButton" destination="uQm-88-UpP" id="fVD-Yw-43b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbr-Ov-0gV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="1tx-B0-orj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="29"/>
+            <point key="canvasLocation" x="2692.753623188406" y="28.794642857142854"/>
         </scene>
         <!--My Places-->
         <scene sceneID="c6e-y8-ht0">
@@ -252,7 +277,7 @@
                                             <outlet property="locationLabel" destination="WXi-PU-1bk" id="1eX-ta-xf2"/>
                                             <outlet property="nameLabel" destination="xYy-Q9-Abv" id="NB0-rD-r3N"/>
                                             <outlet property="typeLabel" destination="pI0-yr-X9L" id="SA5-rS-YxX"/>
-                                            <segue destination="8Hl-7m-al0" kind="show" identifier="showDetail" id="FaC-GL-5C2"/>
+                                            <segue destination="8Hl-7m-al0" kind="show" identifier="showDetail" animates="NO" id="FaC-GL-5C2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -313,6 +338,7 @@
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="24"/>
                         </textAttributes>
+                        <navigationBarAppearance key="standardAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -342,6 +368,11 @@
             <point key="canvasLocation" x="2694" y="-698"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="dja-2T-wUM">
+            <size key="intrinsicContentSize" width="252" height="44"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="FaC-GL-5C2"/>
     </inferredMetricsTieBreakers>

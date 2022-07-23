@@ -8,6 +8,7 @@
 import UIKit
 
 class NewPlaceViewController: UITableViewController {
+    @IBOutlet weak var ratingControl: RatingControl!
     
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -16,15 +17,20 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeType: UITextField!
     
     var isImagePicked = false
-    var currentPlace: Place?
+    var currentPlace: Place!
     
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()//(frame: CGRect(x: 0,
+//                                                         y: 0,
+//                                                         width: tableView.frame.size.width,
+//                                                         height: 1))
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         setupEditScreen()
+        
+        
     }
     
     @objc private func textFieldChanged(){
@@ -76,8 +82,10 @@ class NewPlaceViewController: UITableViewController {
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
             placeImage.image = image
+            ratingControl.rating = Int(currentPlace.rating)
             placeImage.contentMode = .scaleAspectFit
             setupNavigationBar()
+            
         }
     }
     
@@ -90,9 +98,9 @@ class NewPlaceViewController: UITableViewController {
         
         saveButton.isEnabled = true
     }
-    let search = UISearchController()
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
+//        navigationController?.popViewController(animated: false)
         dismiss(animated: false)
     }
     
@@ -104,15 +112,15 @@ class NewPlaceViewController: UITableViewController {
         let newPlace = Place(name: placeName.text!,
                              location: placeLocation.text,
                              type: placeType.text,
-                             imageData: imageData)
+                             imageData: imageData,
+                             rating: Double(ratingControl.rating))
         if currentPlace != nil {
             try! realm.write {
-//                let image = placeImage.image
-//                let imageData = image?.pngData()
                 currentPlace?.name = newPlace.name
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
             StorageManager.saveObject(newPlace)
