@@ -128,5 +128,6 @@ extension MainViewController: UISearchResultsUpdating {
         let predicate = NSPredicate(format: "name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
         filtredPlaces = places.filter(predicate)
         tableView.reloadData()
+        
     }
 }
