@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,11 +33,28 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                                     <color key="backgroundColor" red="0.96470588450000005" green="0.96470588450000005" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS9-WT-N7A">
+                                                    <rect key="frame" x="359" y="189" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="Bs3-AJ-Tur"/>
+                                                        <constraint firstAttribute="height" constant="50" id="NLm-0I-uIx"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="">
+                                                        <imageReference key="image" image="location.fill.viewfinder" catalog="system" symbolScale="default" renderingMode="template"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <segue destination="Ax0-0f-W2T" kind="presentation" identifier="showMap" animates="NO" modalPresentationStyle="fullScreen" id="egc-Yb-TO4"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="ei0-SF-3Lo" secondAttribute="bottom" id="1l4-SB-bLb"/>
                                                 <constraint firstAttribute="trailing" secondItem="ei0-SF-3Lo" secondAttribute="trailing" id="46U-Ba-RoF"/>
                                                 <constraint firstItem="ei0-SF-3Lo" firstAttribute="leading" secondItem="BFN-wU-rXP" secondAttribute="leading" id="GvM-mR-D7G"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="cS9-WT-N7A" secondAttribute="bottom" id="WSI-Hz-Oym"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cS9-WT-N7A" secondAttribute="trailing" constant="-15" id="h31-9g-v0q"/>
                                                 <constraint firstItem="ei0-SF-3Lo" firstAttribute="top" secondItem="BFN-wU-rXP" secondAttribute="top" id="tpu-iX-0Lc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -202,6 +220,48 @@
                 <exit id="1tx-B0-orj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2692.753623188406" y="28.794642857142854"/>
+        </scene>
+        <!--Map Controller-->
+        <scene sceneID="ykv-m8-HuL">
+            <objects>
+                <viewController id="Ax0-0f-W2T" customClass="MapController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CfQ-Ir-BPP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-y3-Rni">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8y-W2-X1o">
+                                <rect key="frame" x="307" y="74" width="77" height="56"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeMapVCButtonAction" destination="Ax0-0f-W2T" eventType="touchUpInside" id="caQ-Oy-jC3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZzW-oc-R2F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZzW-oc-R2F" firstAttribute="trailing" secondItem="b8y-W2-X1o" secondAttribute="trailing" constant="30" id="K18-4E-ZIl"/>
+                            <constraint firstAttribute="bottom" secondItem="gyY-y3-Rni" secondAttribute="bottom" id="Kq1-Nn-tcT"/>
+                            <constraint firstItem="gyY-y3-Rni" firstAttribute="top" secondItem="CfQ-Ir-BPP" secondAttribute="top" id="WTl-8w-Rkr"/>
+                            <constraint firstItem="b8y-W2-X1o" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZzW-oc-R2F" secondAttribute="leading" symbolic="YES" id="Xvi-28-jr8"/>
+                            <constraint firstItem="b8y-W2-X1o" firstAttribute="top" secondItem="ZzW-oc-R2F" secondAttribute="top" constant="30" id="ZOc-Wu-akU"/>
+                            <constraint firstItem="gyY-y3-Rni" firstAttribute="trailing" secondItem="ZzW-oc-R2F" secondAttribute="trailing" id="iYJ-jZ-z9j"/>
+                            <constraint firstItem="gyY-y3-Rni" firstAttribute="leading" secondItem="ZzW-oc-R2F" secondAttribute="leading" id="iZa-Om-Jid"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="gyY-y3-Rni" id="cRg-Yq-dsg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CVd-7O-vIk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3508.6956521739135" y="34.821428571428569"/>
         </scene>
         <!--My Places-->
         <scene sceneID="c6e-y8-ht0">
@@ -374,11 +434,13 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="FaC-GL-5C2"/>
+        <segue reference="XQk-5B-qK7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="location.fill.viewfinder" catalog="system" width="128" height="115"/>
         <image name="no_image_original" width="500" height="500"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
