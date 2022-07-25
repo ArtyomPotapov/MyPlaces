@@ -126,7 +126,6 @@ class NewPlaceViewController: UITableViewController {
             StorageManager.saveObject(newPlace)
         }
     }
-    
 }
 
 extension NewPlaceViewController: UITextFieldDelegate{
@@ -164,7 +163,12 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
             let mapVC = segue.destination as! MapController
-            mapVC.place = currentPlace
+//            mapVC.place = currentPlace
+            mapVC.place.name = placeName.text!
+            mapVC.place.location = placeLocation.text!
+            mapVC.place.type = placeType.text!
+            mapVC.place.imageData = placeImage.image?.pngData()
+
         }
     }
     

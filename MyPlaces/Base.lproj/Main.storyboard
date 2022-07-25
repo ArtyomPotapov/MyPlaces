@@ -36,7 +36,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS9-WT-N7A">
                                                     <rect key="frame" x="359" y="189" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="Bs3-AJ-Tur"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Bs3-AJ-Tur"/>
                                                         <constraint firstAttribute="height" constant="50" id="NLm-0I-uIx"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
@@ -56,6 +56,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="cS9-WT-N7A" secondAttribute="bottom" id="WSI-Hz-Oym"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cS9-WT-N7A" secondAttribute="trailing" constant="-15" id="h31-9g-v0q"/>
                                                 <constraint firstItem="ei0-SF-3Lo" firstAttribute="top" secondItem="BFN-wU-rXP" secondAttribute="top" id="tpu-iX-0Lc"/>
+                                                <constraint firstItem="cS9-WT-N7A" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BFN-wU-rXP" secondAttribute="leading" constant="20" symbolic="YES" id="zIx-cP-MlA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -231,6 +232,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-y3-Rni">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ax0-0f-W2T" id="Ph7-7j-Foc"/>
+                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8y-W2-X1o">
                                 <rect key="frame" x="307" y="74" width="77" height="56"/>
