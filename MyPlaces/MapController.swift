@@ -7,11 +7,14 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapController: UIViewController {
 
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
+    
+    let locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,6 +23,7 @@ class MapController: UIViewController {
         super.viewDidLoad()
         setupPlaceMarker()
 //        mapView.delegate = self - уже сделал в IB
+        checkLocationAutorization()
     }
     
     func setupPlaceMarker(){
@@ -46,7 +50,42 @@ class MapController: UIViewController {
             
         }
     }
-
+    
+    private func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            checkLocationAutorization()
+        } else {
+            //show alertcontroller
+        }
+    }
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    private func checkLocationAutorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            break
+        case .denied:
+            //show alertcontroller
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            //show alertcontroller
+            break
+        case .authorizedAlways:
+            break
+        @unknown default:
+            print("New case is aviable")
+        }
+    }
+    
     @IBAction func closeMapVCButtonAction() {
     dismiss(animated: false)
     }
@@ -77,5 +116,12 @@ extension MapController: MKMapViewDelegate {
         }
         
         return annotationView
+    }
+}
+
+extension MapController: CLLocationManagerDelegate {
+                    //  Этот метод позволяет начать сразу использовать местоположение юзера сразу после изменения статуса с алертом "Разрешить доступ к Вашим геоданным программе <<MyPlaces>>, пока Вы используете её?" Если нажать кнопку Разрешить, то этот делегат отследит это нажатие и выполнит то, что мы ему напишем.
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAutorization()
     }
 }
