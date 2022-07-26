@@ -16,6 +16,7 @@ class MapController: UIViewController {
     
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var myLocationButtom: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
     
@@ -23,7 +24,7 @@ class MapController: UIViewController {
         super.viewDidLoad()
         setupPlaceMarker()
 //        mapView.delegate = self - уже сделал в IB
-        checkLocationAutorization()
+        checkLocationServices()
     }
     
     func setupPlaceMarker(){
@@ -56,7 +57,12 @@ class MapController: UIViewController {
             setupLocationManager()
             checkLocationAutorization()
         } else {
-            //show alertcontroller
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlertController(
+                    title: "Есть проблема - выключена геолокация",
+                    message: "Уберите запрет на геолокацию: Settings -> Privacy -> Location Services, затем Turn On"
+                )
+            }
         }
     }
     
@@ -71,18 +77,35 @@ class MapController: UIViewController {
             mapView.showsUserLocation = true
             break
         case .denied:
-            //show alertcontroller
+            showAlertController(title: "Есть проблема", message: "Уберите запрет на геолокацию")
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             break
         case .restricted:
-            //show alertcontroller
+            showAlertController(title: "Есть проблема", message: "Уберите запрет на геолокацию")
             break
         case .authorizedAlways:
             break
         @unknown default:
             print("New case is aviable")
+        }
+    }
+    
+    private func showAlertController(title: String, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: false)
+    }
+    
+    // устанавливает центр экрана в точку локации юзера, а не ресторана
+    @IBAction func myLocationButtomTapped() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(
+                center: location,
+                latitudinalMeters: 20000,
+                longitudinalMeters: 20000)
+            mapView.setRegion(region, animated: false)
         }
     }
     

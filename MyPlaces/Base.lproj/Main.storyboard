@@ -246,6 +246,20 @@
                                     <action selector="closeMapVCButtonAction" destination="Ax0-0f-W2T" eventType="touchUpInside" id="caQ-Oy-jC3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="35" placeholderIntrinsicHeight="35" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30k-lJ-VMi">
+                                <rect key="frame" x="369" y="817" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="L9P-JU-upy"/>
+                                    <constraint firstAttribute="height" constant="35" id="PC6-2V-Q50"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="location.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="myLocationButtomTapped" destination="Ax0-0f-W2T" eventType="touchUpInside" id="Sml-M3-ZZ8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZzW-oc-R2F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -257,10 +271,13 @@
                             <constraint firstItem="b8y-W2-X1o" firstAttribute="top" secondItem="ZzW-oc-R2F" secondAttribute="top" constant="30" id="ZOc-Wu-akU"/>
                             <constraint firstItem="gyY-y3-Rni" firstAttribute="trailing" secondItem="ZzW-oc-R2F" secondAttribute="trailing" id="iYJ-jZ-z9j"/>
                             <constraint firstItem="gyY-y3-Rni" firstAttribute="leading" secondItem="ZzW-oc-R2F" secondAttribute="leading" id="iZa-Om-Jid"/>
+                            <constraint firstItem="ZzW-oc-R2F" firstAttribute="bottom" secondItem="30k-lJ-VMi" secondAttribute="bottom" constant="10" id="iep-3O-dwp"/>
+                            <constraint firstItem="ZzW-oc-R2F" firstAttribute="trailing" secondItem="30k-lJ-VMi" secondAttribute="trailing" constant="10" id="te3-R5-aM7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="gyY-y3-Rni" id="cRg-Yq-dsg"/>
+                        <outlet property="myLocationButtom" destination="30k-lJ-VMi" id="jA7-mJ-iV1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CVd-7O-vIk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -442,6 +459,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="location.fill.viewfinder" catalog="system" width="128" height="115"/>
         <image name="no_image_original" width="500" height="500"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
