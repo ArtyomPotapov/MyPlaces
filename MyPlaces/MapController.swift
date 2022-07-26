@@ -13,18 +13,30 @@ class MapController: UIViewController {
 
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
-    
+    var incomeSegueIdentifier = ""
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var myLocationButtom: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var mapPinImage: UIImageView!
+    @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var doneButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPlaceMarker()
+        setupMapView()
 //        mapView.delegate = self - уже сделал в IB
         checkLocationServices()
+    }
+    
+    private func setupMapView(){
+        if incomeSegueIdentifier == "showMap"{
+            setupPlaceMarker()
+            mapPinImage.isHidden = true
+            addressLabel.isHidden = true
+            doneButton.isHidden = true
+        }
     }
     
     func setupPlaceMarker(){
@@ -75,6 +87,9 @@ class MapController: UIViewController {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
+            if incomeSegueIdentifier == "getAddress" {
+                showUserLocation()
+            }
             break
         case .denied:
             showAlertController(title: "Есть проблема", message: "Уберите запрет на геолокацию")
@@ -100,6 +115,11 @@ class MapController: UIViewController {
     
     // устанавливает центр экрана в точку локации юзера, а не ресторана
     @IBAction func myLocationButtomTapped() {
+        
+       showUserLocation()
+    }
+    
+    func showUserLocation() {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion(
                 center: location,
@@ -107,6 +127,9 @@ class MapController: UIViewController {
                 longitudinalMeters: 20000)
             mapView.setRegion(region, animated: false)
         }
+    }
+    
+    @IBAction func doneButtomPressed() {
     }
     
     @IBAction func closeMapVCButtonAction() {

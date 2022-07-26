@@ -161,15 +161,22 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     //MARK: - Navigation prepare(for segue:
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
-            let mapVC = segue.destination as! MapController
-//            mapVC.place = currentPlace
-            mapVC.place.name = placeName.text!
-            mapVC.place.location = placeLocation.text!
-            mapVC.place.type = placeType.text!
-            mapVC.place.imageData = placeImage.image?.pngData()
+        
+        guard
+            let identifier = segue.identifier,
+            let mapVC = segue.destination as? MapController
+        else { return }
+        
+        mapVC.incomeSegueIdentifier = identifier
 
-        }
+                if identifier == "showMap"{
+                    mapVC.place.name = placeName.text!
+                    mapVC.place.location = placeLocation.text!
+                    mapVC.place.type = placeType.text!
+                    mapVC.place.imageData = placeImage.image?.pngData()
+                }
+
+//        }
     }
     
 }
