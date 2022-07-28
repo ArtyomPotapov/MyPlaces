@@ -302,6 +302,21 @@
                                     <action selector="doneButtomPressed" destination="Ax0-0f-W2T" eventType="touchUpInside" id="Zte-Ue-DTB"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-Pw-fwO">
+                                <rect key="frame" x="182" y="752" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="NhL-lf-gfY"/>
+                                    <constraint firstAttribute="height" constant="50" id="tcn-xu-ygp"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.bounce.right.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="goButtonPressed" destination="Ax0-0f-W2T" eventType="touchUpInside" id="9qq-Mo-sG1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZzW-oc-R2F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -309,6 +324,7 @@
                             <constraint firstItem="eXk-F2-qyg" firstAttribute="centerX" secondItem="CfQ-Ir-BPP" secondAttribute="centerX" id="0ln-7c-ca6"/>
                             <constraint firstItem="ZzW-oc-R2F" firstAttribute="bottom" secondItem="eXk-F2-qyg" secondAttribute="bottom" constant="25" id="AKf-0H-VJd"/>
                             <constraint firstItem="30k-lJ-VMi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZzW-oc-R2F" secondAttribute="leading" symbolic="YES" id="F22-CJ-xVS"/>
+                            <constraint firstItem="Jw9-Pw-fwO" firstAttribute="centerX" secondItem="CfQ-Ir-BPP" secondAttribute="centerX" id="I9Q-8e-sHa"/>
                             <constraint firstItem="ZzW-oc-R2F" firstAttribute="trailing" secondItem="b8y-W2-X1o" secondAttribute="trailing" constant="30" id="K18-4E-ZIl"/>
                             <constraint firstAttribute="bottom" secondItem="gyY-y3-Rni" secondAttribute="bottom" id="Kq1-Nn-tcT"/>
                             <constraint firstItem="4L2-D5-KTC" firstAttribute="centerY" secondItem="CfQ-Ir-BPP" secondAttribute="centerY" constant="-20" id="Lnj-bx-pjE"/>
@@ -316,6 +332,7 @@
                             <constraint firstItem="gyY-y3-Rni" firstAttribute="top" secondItem="CfQ-Ir-BPP" secondAttribute="top" id="WTl-8w-Rkr"/>
                             <constraint firstItem="b8y-W2-X1o" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZzW-oc-R2F" secondAttribute="leading" symbolic="YES" id="Xvi-28-jr8"/>
                             <constraint firstItem="b8y-W2-X1o" firstAttribute="top" secondItem="ZzW-oc-R2F" secondAttribute="top" constant="30" id="ZOc-Wu-akU"/>
+                            <constraint firstItem="ZzW-oc-R2F" firstAttribute="bottom" secondItem="Jw9-Pw-fwO" secondAttribute="bottom" constant="60" id="heJ-Cm-5y4"/>
                             <constraint firstItem="gyY-y3-Rni" firstAttribute="trailing" secondItem="ZzW-oc-R2F" secondAttribute="trailing" id="iYJ-jZ-z9j"/>
                             <constraint firstItem="gyY-y3-Rni" firstAttribute="leading" secondItem="ZzW-oc-R2F" secondAttribute="leading" id="iZa-Om-Jid"/>
                             <constraint firstItem="ZzW-oc-R2F" firstAttribute="bottom" secondItem="30k-lJ-VMi" secondAttribute="bottom" constant="50" id="iep-3O-dwp"/>
@@ -328,6 +345,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="sx5-fb-D1F" id="Y3s-yx-QkS"/>
                         <outlet property="doneButton" destination="eXk-F2-qyg" id="E3K-L1-nIe"/>
+                        <outlet property="goButton" destination="Jw9-Pw-fwO" id="zjr-kS-xfS"/>
                         <outlet property="mapPinImage" destination="4L2-D5-KTC" id="UPb-Jg-amP"/>
                         <outlet property="mapView" destination="gyY-y3-Rni" id="cRg-Yq-dsg"/>
                         <outlet property="myLocationButtom" destination="30k-lJ-VMi" id="jA7-mJ-iV1"/>
@@ -513,6 +531,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="arrowshape.bounce.right.fill" catalog="system" width="128" height="86"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="location.fill.viewfinder" catalog="system" width="128" height="115"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
