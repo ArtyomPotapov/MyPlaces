@@ -8,8 +8,8 @@
 import UIKit
 
 class NewPlaceViewController: UITableViewController {
-    @IBOutlet weak var ratingControl: RatingControl!
     
+    @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeName: UITextField!
@@ -168,6 +168,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         else { return }
         
         mapVC.incomeSegueIdentifier = identifier
+        mapVC.mapViewControllerDelegate = self
 
                 if identifier == "showMap"{
                     mapVC.place.name = placeName.text!
@@ -175,8 +176,11 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
                     mapVC.place.type = placeType.text!
                     mapVC.place.imageData = placeImage.image?.pngData()
                 }
-
-//        }
     }
-    
+}
+
+extension NewPlaceViewController: MapControllerDelegate {
+    func getAddress(_ address: String?) {
+        placeLocation.text = address
+    }
 }

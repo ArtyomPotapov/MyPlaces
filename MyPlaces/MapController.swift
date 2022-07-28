@@ -9,8 +9,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol MapControllerDelegate {
+    func getAddress(_ address: String?)
+}
+
 class MapController: UIViewController {
 
+    var mapViewControllerDelegate: MapControllerDelegate?
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     var incomeSegueIdentifier = ""
@@ -28,6 +33,7 @@ class MapController: UIViewController {
         setupMapView()
 //        mapView.delegate = self - уже сделал в IB
         checkLocationServices()
+        addressLabel.text = ""
     }
     
     private func setupMapView(){
@@ -113,6 +119,13 @@ class MapController: UIViewController {
         present(ac, animated: false)
     }
     
+    private func getLocationAtCenterScreen(for view: MKMapView) -> CLLocation {
+        let latitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.longitude
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    
     // устанавливает центр экрана в точку локации юзера, а не ресторана
     @IBAction func myLocationButtomTapped() {
         
@@ -129,7 +142,12 @@ class MapController: UIViewController {
         }
     }
     
+    
+    
     @IBAction func doneButtomPressed() {
+        mapViewControllerDelegate?.getAddress(addressLabel.text)
+        dismiss(animated: false)
+
     }
     
     @IBAction func closeMapVCButtonAction() {
@@ -163,6 +181,32 @@ extension MapController: MKMapViewDelegate {
         
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = getLocationAtCenterScreen(for: mapView)
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(center) { placeMarks, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let  placeMarks = placeMarks else { return }
+            let placeMark = placeMarks.first
+            let streetName = placeMark?.thoroughfare
+            let buildNumber = placeMark?.subThoroughfare
+            
+            DispatchQueue.main.async {
+                if streetName != nil && buildNumber != nil {
+                    self.addressLabel.text = "\(streetName!), \(buildNumber!)"
+                } else if streetName != nil{
+                    self.addressLabel.text = streetName!
+                } else {
+                    self.addressLabel.text = "смените адрес"}
+                
+            }
+        }
+    }
+    
 }
 
 extension MapController: CLLocationManagerDelegate {
