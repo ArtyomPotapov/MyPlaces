@@ -21,6 +21,13 @@ class MapController: UIViewController {
     var incomeSegueIdentifier = ""
     let locationManager = CLLocationManager()
     var placeCoordinate: CLLocationCoordinate2D?
+    var directionsArray: [MKDirections] = []
+    var previousLocation: CLLocation? {
+        didSet {
+            startTrackingUserLocation()
+        }
+    }
+    
     
     @IBOutlet weak var myLocationButtom: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -50,6 +57,13 @@ class MapController: UIViewController {
             goButton.isHidden = false
             
         }
+    }
+    
+    private func resetMapView(withNew directions: MKDirections){
+        mapView.removeOverlays(mapView.overlays)
+        directionsArray.append(directions)
+        let _ = directionsArray.map { $0.cancel() }
+        directionsArray.removeAll()
     }
     
     func setupPlaceMarker(){
@@ -125,11 +139,19 @@ class MapController: UIViewController {
         guard let location = locationManager.location?.coordinate else {
             showAlertController(title: "Error", message: "Current location is not found")
             return }
-        guard let request = createDirectionRequest(from: location) else {
+        
+        locationManager.startUpdatingLocation() // отслеживание и обновление локации юзера, если он перемещается
+        previousLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)   // сохранение места пользователя, понадобится когда он начнет перемещаться, будем вычитать
+        
+        
+        guard let request = createDirectionsRequest(from: location) else {
             showAlertController(title: "Error", message: "Destination is not found")
             return }
-        let direction = MKDirections(request: request)
-        direction.calculate {  response, error in
+        
+        let directions = MKDirections(request: request)
+        resetMapView(withNew: directions) // сброс старых маршрутов, если они есть
+        
+        directions.calculate {  response, error in
             if let error = error {
                 print(error)
                 return
@@ -151,7 +173,7 @@ class MapController: UIViewController {
         }
     }
     
-    private func createDirectionRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+    private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else { return nil }
         let startLocation = MKPlacemark(coordinate: coordinate)
         let destination = MKPlacemark(coordinate: destinationCoordinate)
@@ -184,16 +206,26 @@ class MapController: UIViewController {
        showUserLocation()
     }
     
-    func showUserLocation() {
+    private func showUserLocation() {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion(
                 center: location,
-                latitudinalMeters: 20000,
-                longitudinalMeters: 20000)
+                latitudinalMeters: 1000,
+                longitudinalMeters: 1000)
             mapView.setRegion(region, animated: false)
         }
     }
     
+    private func startTrackingUserLocation() { // проверка нужно ли обновлять экран, срабатывет если дистанция более 50 метров от старого местоположения
+        guard let previousLocation = previousLocation else { return }
+        let center = getLocationAtCenterScreen(for: mapView)
+        guard center.distance(from: previousLocation) > 50 else { return }
+        self.previousLocation = center
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // сначала показывается весь маршрут, а спустя 3 сек фокусируется на положении юзера
+            self.showUserLocation()
+        }
+    }
     
     @IBAction func goButtonPressed() {
         getDirection()
@@ -240,6 +272,16 @@ extension MapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = getLocationAtCenterScreen(for: mapView)
         let geocoder = CLGeocoder()
+        
+        // сработает при изменении масштаба карты или при смещении, но второе условие --previousLocation != nil-- сработает только при построении маршрута, т.к. эту переменную мы активируем именно тогда
+        if incomeSegueIdentifier == "showMap" && previousLocation != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.showUserLocation()
+            }
+        }
+        
+        geocoder.cancelGeocode()    // рекомендуется при использовании замыкания с использованием CLGeocoder(). ->  Canceling a pending request causes the completion handler block to be called.
+        
         geocoder.reverseGeocodeLocation(center) { placeMarks, error in
             if let error = error {
                 print(error)
